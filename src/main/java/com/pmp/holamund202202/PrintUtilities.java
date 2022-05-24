@@ -18,7 +18,7 @@ public class PrintUtilities {
     }
     public static String readInput( Scanner keyInput, String label, String defaultValue) {
         System.out.println("");
-        System.out.println(label + " : ");
+        System.out.println(label + " < " + defaultValue + " > :");
         String inputValue = keyInput.nextLine();
         //  || or   && and
         if (inputValue.isEmpty() || inputValue.isBlank()) {
@@ -30,7 +30,16 @@ public class PrintUtilities {
         System.out.println("===================================================");
         System.out.println("Opciones");
         System.out.println("===================================================");
-        System.out.println("P \t Datos Personales");
+        // System.out.println("P \t Datos Personales");
+        System.out.println("M \t Mostrar Categorías");
+        System.out.println("C \t Crear nueva Categoría");
+        System.out.println("E \t Editar Categoría");
+        System.out.println("D \t Eliminar Categoría");
+        
+        
         System.out.println("S \t Salir");
+    }
+    public static void print(String text){
+        System.out.println(text);
     }
 }

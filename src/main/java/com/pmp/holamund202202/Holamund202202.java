@@ -32,6 +32,10 @@ public class Holamund202202 {
                 case "C":
                     createNewCategoria();
                     break;
+                case "E":
+                    mostrarCategorias();
+                    updateCategoria();
+                    break;
                 case "M":
                     mostrarCategorias();
                     break;
@@ -82,6 +86,38 @@ public class Holamund202202 {
         int codigo = categoriaCode;
         newCategory.setCodigo(codigo);
         categorias.add(newCategory);
+    }
+    
+    private static void updateCategoria() {
+        int selectedCodigo = Integer.parseInt(
+                PrintUtilities.readInput(keyInput, "Código de la Categoría", "")
+            );
+        if (selectedCodigo == 0) {
+            PrintUtilities.printH1("El Código ingresado no es correcto o no se encuentra.");
+        } else {
+            Categoria categoryToUpdate = null;
+            for (int i = 0; i < categorias.size(); i++) {
+                if (categorias.get(i).getCodigo()== selectedCodigo) {
+                    categoryToUpdate = categorias.get(i);
+                    break;
+                }
+            }
+            if (categoryToUpdate == null) {
+                PrintUtilities.printH1("El Código ingresado no es correcto o no se encuentra.");
+            } else {
+                PrintUtilities.print("Categoría a Modificar");
+                PrintUtilities.print(categoryToUpdate.printString());
+                PrintUtilities.print("-----------------------");
+                categoryToUpdate.setNombre(
+                        PrintUtilities.readInput(keyInput, "Categoría", categoryToUpdate.getNombre())
+                );
+                categoryToUpdate.setEstado(
+                        PrintUtilities.readInput(keyInput, "Estado", categoryToUpdate.getEstado())
+                );
+                PrintUtilities.print("---------------------");
+                PrintUtilities.print(categoryToUpdate.printString());
+            }
+        }
     }
     
     private static void init(){
