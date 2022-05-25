@@ -36,6 +36,9 @@ public class Holamund202202 {
                     mostrarCategorias();
                     updateCategoria();
                     break;
+                case "D":
+                    mostrarCategorias();
+                    eliminarCategoria();
                 case "M":
                     mostrarCategorias();
                     break;
@@ -116,6 +119,41 @@ public class Holamund202202 {
                 );
                 PrintUtilities.print("---------------------");
                 PrintUtilities.print(categoryToUpdate.printString());
+            }
+        }
+    }
+    
+    private static void eliminarCategoria() {
+        int selectedCodigo = Integer.parseInt(
+                PrintUtilities.readInput(keyInput, "Código de la Categoría", "")
+            );
+        if (selectedCodigo == 0) {
+            PrintUtilities.printH1("El Código ingresado no es correcto o no se encuentra.");
+        } else {
+            Categoria categoryToDelete = null;
+            int indexToRemove = -1;
+            for (int i = 0; i < categorias.size(); i++) {
+                if (categorias.get(i).getCodigo()== selectedCodigo) {
+                    categoryToDelete = categorias.get(i);
+                    indexToRemove = i;
+                    break;
+                }
+            }
+            if (categoryToDelete == null) {
+                PrintUtilities.printH1("El Código ingresado no es correcto o no se encuentra.");
+            } else {
+                PrintUtilities.print("Categoría a Eliminar");
+                PrintUtilities.print(categoryToDelete.printString());
+                PrintUtilities.print("-----------------------");
+                String eliminar = PrintUtilities.readInput(keyInput, "Desea eliminar esta categoría? (S, N): ", "N");
+                if ( eliminar.equalsIgnoreCase("S") ) {
+                    categorias.remove(indexToRemove);
+                    PrintUtilities.print("Categoría Eliminada");
+                } else {
+                    PrintUtilities.print("Eliminación fue Cancelada");
+                }
+                
+                PrintUtilities.print("---------------------");
             }
         }
     }
