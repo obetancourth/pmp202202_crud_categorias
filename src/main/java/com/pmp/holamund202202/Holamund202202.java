@@ -7,6 +7,7 @@ package com.pmp.holamund202202;
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.pmp.dao.Categoria;
+import com.pmp.dao.CategoriaDao;
 /**
  *
  * @author obetancourth
@@ -72,6 +73,7 @@ public class Holamund202202 {
     }
     
     private static void mostrarCategorias(){
+        categorias = CategoriaDao.obtenerTodos();
         for( int i = 0; i< categorias.size(); i++) {
             Categoria currentCategoria = categorias.get(i);
             System.out.println( currentCategoria.printString());
@@ -85,10 +87,11 @@ public class Holamund202202 {
         Categoria newCategory = new Categoria();
         newCategory.setEstado(estado);
         newCategory.setNombre(nombre);
-        categoriaCode ++;
-        int codigo = categoriaCode;
-        newCategory.setCodigo(codigo);
-        categorias.add(newCategory);
+        //categoriaCode ++;
+        //int codigo = categoriaCode;
+        //newCategory.setCodigo(codigo);
+        CategoriaDao.agregarNuevo(newCategory);
+        categorias = CategoriaDao.obtenerTodos();
     }
     
     private static void updateCategoria() {
@@ -160,6 +163,7 @@ public class Holamund202202 {
     
     private static void init(){
         keyInput = new Scanner(System.in);
+        CategoriaDao.setup();
         categorias = new ArrayList<Categoria>();
     }
 }
