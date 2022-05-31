@@ -121,7 +121,9 @@ public class Holamund202202 {
                         PrintUtilities.readInput(keyInput, "Estado", categoryToUpdate.getEstado())
                 );
                 PrintUtilities.print("---------------------");
-                PrintUtilities.print(categoryToUpdate.printString());
+                // DAO
+                CategoriaDao.actualizar(categoryToUpdate);
+                categorias = CategoriaDao.obtenerTodos();
             }
         }
     }
@@ -150,7 +152,9 @@ public class Holamund202202 {
                 PrintUtilities.print("-----------------------");
                 String eliminar = PrintUtilities.readInput(keyInput, "Desea eliminar esta categoría? (S, N): ", "N");
                 if ( eliminar.equalsIgnoreCase("S") ) {
-                    categorias.remove(indexToRemove);
+                    //categorias.remove(indexToRemove);
+                    CategoriaDao.eliminarCategoria(categoryToDelete.getCodigo());
+                    categorias = CategoriaDao.obtenerTodos();
                     PrintUtilities.print("Categoría Eliminada");
                 } else {
                     PrintUtilities.print("Eliminación fue Cancelada");

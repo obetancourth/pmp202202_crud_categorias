@@ -63,4 +63,39 @@ public class CategoriaDao {
             return null;
         }
     }
+    
+    public static Categoria actualizar(Categoria updCategoria) {
+        String sqlUpdateCategoria = "UPDATE CATEGORIAS set NOMBRE=? , ESTADO=? where CODIGO=?;";
+        try {
+            PreparedStatement comando = Conexion.getConexion().prepareStatement(sqlUpdateCategoria);
+            comando.setString(1, updCategoria.getNombre());
+            comando.setString(2, updCategoria.getEstado());
+            comando.setInt(3, updCategoria.getCodigo());
+            int registroActualizado = comando.executeUpdate();
+            comando.close();
+            return updCategoria;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            System.exit(1);
+            return null;
+        }
+        
+    }
+    
+    public static int eliminarCategoria (int codEliminar) {
+        String sqlEliminarCategoria = "DELETE FROM CATEGORIAS WHERE CODIGO=?;";
+        try {
+            PreparedStatement comando = Conexion.getConexion().prepareStatement(sqlEliminarCategoria);
+            comando.setInt(1, codEliminar);
+            int registrosEliminados = comando.executeUpdate();
+            comando.close();
+            return registrosEliminados;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            System.exit(1);
+            return 0;
+        }
+    
+    }
+    
 }
